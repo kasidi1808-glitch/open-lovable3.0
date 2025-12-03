@@ -62,6 +62,43 @@ pnpm dev  # or npm run dev / yarn dev
 
 Open [http://localhost:3000](http://localhost:3000)
 
+## Deploying to Vercel
+
+This project is ready to deploy to Vercel with the included `vercel.json` configuration. The app uses pnpm for installs and builds and requires the environment variables listed in [`.env.local`](#add-envlocal).
+
+### One-time setup
+
+1. Install the Vercel CLI:
+   ```bash
+   pnpm dlx vercel@latest --global
+   ```
+2. Link the project to your Vercel account (and team, if applicable):
+   ```bash
+   vercel link
+   ```
+3. Push environment variables to Vercel (fill in the values from your local `.env.local`):
+   ```bash
+   vercel env pull .env.local
+   vercel env push
+   ```
+
+### Deploy
+
+1. Build locally to verify:
+   ```bash
+   pnpm build
+   ```
+2. Deploy to a preview environment:
+   ```bash
+   vercel
+   ```
+3. Promote to production when ready:
+   ```bash
+   vercel --prod
+   ```
+
+The Vercel dashboard will automatically use `pnpm install --frozen-lockfile` and `pnpm build`, and API routes under `app/api/**` are configured for longer execution windows to support the app's AI and scraping workflows.
+
 ## License
 
 MIT
